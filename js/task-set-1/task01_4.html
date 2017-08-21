@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Task01_4</title>
+	</head>
+	<body>
+		<p>click the button to find 1st January be a Sunday between 2014 and 2050</p>
+		<input type="button" name="button" onclick="daycount();" value="click">
+		<p id="output"></p>
+		<script type="text/javascript">
+		function daycount() {
+			c = 0;
+			for(var y=2014 ; y<=2050 ; y++) {
+				var d = new Date(y, 0, 1);
+				if(d.getDay() == 0)
+				{
+					document.getElementById("output").innerHTML +="<br>1st January is being a Sunday in " + y;
+				} 	 
+			}
+		}
+		</script>
+	</body>
+<html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+    <head>
+	<title>Task 1_08</title>
+    </head>
+    <body>
+		Enter the name : <input type="text" id="input"><br>
+		Enter the age : <input type="text" id="input2"><br><br>
+		<input type="button" value="enter" onclick="getRecord();"><br>
+		<p id="Output"></p>
+		Click to sort by name <input type="button" value="Sort" onclick="Sortlist();">
+		<p id="Output1"></p>
+		<script type="text/javascript" >
+			i = 0;
+			var record = [];
+	    	function getRecord() {
+	    		var n = document.getElementById("input").value;
+	    		var a = document.getElementById("input2").value;
+	       		var person = {name : n , age : a};
+	       		record.push(person);
+	       		document.getElementById("input").value = "";
+	       		document.getElementById("input2").value = "";
+	       		document.getElementById("Output").innerHTML += n + " " + a + "<br>";
+	    	}	
+	    	// reference https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+	    	 
+	    	function Sortlist() {
+	    		record.sort( function (a, b) {
+	    			var nameA = a.name.toUpperCase();
+  					var nameB = b.name.toUpperCase();
+ 					if (nameA < nameB) {
+   						 return -1;
+  					}
+  					if (nameA > nameB) {
+    					return 1;
+  					}
+					return 0;
+	    		});
+	    		for(var i = 0 ; i < record.length ; i++) {
+	    			document.getElementById("Output1").innerHTML += record[i].name + " " + record[i].age + "<br>";
+	    		}
+	    	}
+
+		</script>
+    </body>
+</html>

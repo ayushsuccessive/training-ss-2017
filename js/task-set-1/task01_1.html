@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+    <head>
+	<title>Task 1_01</title>
+    </head>
+    <body>
+	Enter some input : <input type="text" id="input">
+	<input type="button" id="check" value="check" onclick="checkinput();">
+	<script type="text/javascript" >
+	    function checkinput()
+	    {	
+	        var x = document.getElementById('input').value; 
+		if(isNaN(x))
+		    alert("Entered value is not a number");	           
+	        else {
+		    if(x%2 == 0)
+		        alert("Entered value is a even number");
+		    else
+		        alert("Entered value is a odd number");
+		}
+	    }	
+	</script>
+    </body>
+</html>

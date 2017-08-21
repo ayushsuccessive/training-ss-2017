@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+    <head>
+	<title>Task 01_7</title>
+    </head>
+    <body>
+	Enter a string : <input type="text" id="input">
+	<input type="button" value="Enter" onclick="showstring();">
+	<p id="output"></p>
+	Enter charter to trim : <input type="text" id="input2" maxlength="1">
+	<input type="button" value="Trim character" onclick="extractchar();">
+	<p id="output2"></p>
+	<script type="text/javascript" >
+	    function showstring() {
+			var s =  document.getElementById("input").value;
+			document.getElementById("output").innerHTML = s;	    		
+	    }
+	    function extractchar() {
+	    	var s =  document.getElementById("input").value;
+	    	var ch =  document.getElementById("input2").value;
+	    	var str = "";
+	    	var l = s.length;
+			for(var i = 0 ; i < l ; i++) {
+				if (s.charAt(i) != ch) {
+					str += s[i];
+				}
+			}
+			document.getElementById("output2").innerHTML = str;
+	    }
+	</script>
+    </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Task01_3</title>
+	</head>
+	<body>
+		<p>click on button to find the sum of prime no between 1 to 999</p>
+		<input type="button" value="getprime" onclick="getprime();">
+		<p id="output"></p>
+		<script type="text/javascript">
+			function getprime() {
+				var flag;
+				var sum = 0;
+				document.getElementById("output").innerHTML += "prime no between 1 to 999 are: ";
+				//document.write("prime no between 1 to 999 are : <br>");
+				for(var i = 2 ; i <= 999 ; i++) {
+					flag = 0;
+					for(var j = 2 ; j <= i/2 ; j++) {
+						if(i % j == 0) {
+							flag = 1;
+						}
+					}
+					if(flag == 0)
+					{
+						document.getElementById("output").innerHTML += i+", ";
+						//document.write(i+", ");
+						sum = sum + i;
+					}
+				}
+				document.getElementById("output").innerHTML += "<br><br>sum of prime = " + sum;
+				//document.write("<br><br>sum of prime = " + sum);
+			}
+		</script>
+	</body>
+<html>

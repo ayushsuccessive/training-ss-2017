@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+    <head>
+	<title>Task 01_6</title>
+    </head>
+    <body>
+	Enter a number between 1-10 : <input type="text" id="input">
+	<input type="button" id="check" value="check" onclick="checkinput();">
+	<p id="output">
+	<script type="text/javascript" >
+	    function checkinput() {
+	    	var x = Math.floor(Math.random() * 10) + 1;
+	    	var y = parseInt(document.getElementById("input").value);
+	    	if(x == y) {
+	    		document.getElementById("output").innerHTML = "GoodWork";
+	    	}
+	    	else
+	    		document.getElementById("output").innerHTML = "Not matched";
+	    }
+	</script>
+    </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Task01_5</title>
+	</head>
+	<body>
+		<input type="button" value="get Time" onclick="calc_time();">
+		<p id="output"></p>
+
+		<script type="text/javascript">
+			function calc_time() {
+			
+				var d = new Date();
+				var hours = d.getHours();
+				var timezone = "AM" ; 
+				if(hours > 12) {
+					timezone = "PM" ;
+					hours = hours - 12;
+				}
+
+				var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+				document.getElementById("output").innerHTML += "Today is " + days[d.getDay()];
+				document.getElementById("output").innerHTML += "<br>Current time is : "+ hours + ":" + d.getMinutes() + " " + timezone; 
+			
+				document.getElementById("output").innerHTML += "<br>" + (d.getMonth() + 1 ) + "/" + d.getDate() + "/" + d.getFullYear();
+			}
+		</script>
+	</body>
+<html>

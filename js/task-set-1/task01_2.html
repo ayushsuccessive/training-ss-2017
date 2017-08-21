@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+    <head>
+	<title>Task 1_02</title>
+    </head>
+    <body>
+	Enter two numbers : <input type="text" id="input1">
+	<input type="text" id="input2">
+	<br>
+	Enter arithmetic operator (+,-,*, /) <input type="text" id="input3">
+	<br>
+	<input type="button" id="check" value="check" onclick="checkinput();">
+	<script type="text/javascript" >
+	    function checkinput()
+	    {	
+			var operator = document.getElementById('input3').value;
+			var x = parseInt(document.getElementById('input1').value);
+			var y = parseInt(document.getElementById('input2').value); 
+		    if (operator == "+")
+				alert (x+y);
+		    else if (operator == "-")
+				alert (x-y);
+		    else if (operator == "*")
+				alert (x*y);
+		    else if (operator == "/")
+				alert (x/y);
+	        
+	    }	
+	</script>
+    </body>
+</html>

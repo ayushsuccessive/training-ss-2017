@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bootstrap</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="panel panel-info">
+		<div class="panel panel-heading text-center">Bootstrap</div>
+		<div class="panel panel-body text-center"> 
+			<p class="text-info">click to open Bootstrap Modal</p>
+			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+		</div>
+			<!-- Modal -->  
+		<div class="modal fade" id="myModal" role="dialog">  
+		    <div class="modal-dialog">  
+		      
+		      <!-- Modal content-->  
+		 	    <div class="modal-content">  
+		      	    <div class="modal-header">  
+		          		<button type="button" class="close" data-dismiss="modal">×</button>  
+		          		<h4 class="modal-title">Enter a number {0/1}</h4>  
+		        	</div>  
+		        	<div class="modal-body">  
+		          		<input type="text" class="form-control" id="input">  
+		        	</div>  
+		        	<div class="modal-footer">  
+		        		<button type="button" class="btn btn-success" id="save">Save</button>
+		          		<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>  
+		        	</div>  
+		      	</div>  
+		        
+		    </div>  
+		</div>  
+	</div>
+
+
+	<div class="alert alert-success" style="display:none;">
+		<strong>Success!</strong> Value entered is 0
+	</div>
+
+	<div class="alert alert-info" style="display:none;">
+		<strong>Info!</strong> Value entered is 1
+	</div>
+
+	<div class="alert alert-warning" style="display:none;">
+		<strong>Warning!</strong> Value entered is other then 0/1
+	</div>
+
+	<div class="alert alert-danger" style="display:none;">
+		<strong>Danger!</strong> Value entered is not a number
+	</div>
+	    
+	<script>
+	$(function() {
+		$("#save").click( function() {
+			$(".alert-success").prop("style","display:none");
+			$(".alert-info").prop("style","display:none");
+			$(".alert-warning").prop("style","display:none");
+			$(".alert-danger").prop("style","display:none");
+			x = $("#input").val();
+			if($.isNumeric(x)) {
+				if(x == 0)
+					$(".alert-success").prop("style","display:block");
+				else if(x == 1)
+					$(".alert-info").prop("style","display:block");
+				else
+					$(".alert-warning").prop("style","display:block");
+			}
+			else
+				$(".alert-danger").prop("style","display:block");
+
+			$("#myModal").modal('toggle');
+			$("#input").val("");
+		});
+	});	
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Form Validation</title>
+	<link rel="stylesheet" type="text/css" href="form.css"> 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+	<h2>Form</h2>
+	<FORM id="Myform"> 
+	<table border="0">
+		<tr>
+			<td>First Name </td>
+			<td><input type="text" id="firstname" class="name"></td>
+			<td><span class="errormsg" id="errfname"></span></td>
+		</tr>
+		<tr>
+			<td>Last Name </td>
+			<td><input type="text" id="lastname" class="name"></td>
+			<td><span class="errormsg" id="errlname"></span></td>
+		</tr>
+		<tr>
+			<td>Phone No. </td>
+			<td><input type="text" id="phoneno"></td>
+			<td><span class="errormsg" id="errpnumb"></span></td>
+		</tr>
+		<tr>
+			<td>DOB </td>
+			<td><input type="text" id="dobid"></td>
+			<td><span class="errormsg" id="errdob"></span></td>
+		</tr>
+		<tr>
+			<td>Email id </td>
+			<td><input type="text" id="emailid"></td>
+			<td><span class="errormsg" id="erremail"></span></td>
+		</tr>
+		<tr>
+			<td>Password </td>
+			<td><input type="text" id="password"></td>
+			<td><span class="errormsg" id="errpass"></span></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<input type="button" value="Submit" id="submitbtn" onclick="return validation();">&emsp;&emsp;
+				<input type="button" value="Cancel">
+			</td>
+		</tr>
+	</table>	
+	</FORM>
+	<p>Age : <span id="age"></span></p>
+
+
+	<script type="text/javascript">
+		function validfield (value) {
+			this.name = value;
+			this.valid = false;
+			this.exist = true;
+		}
+
+		validfield.prototype = {
+			constructor:validfield,
+			
+			validlength:function(input) {
+				if(input.length < 6 || input.length > 15)
+					this.valid = false;
+				else
+					this.valid = true;
+			},
+			
+			empty:function(input) {
+				if(input == "")
+					this.exist = false;
+				else
+					this.exist = true;
+			},
+
+			hasnumber:function(input) {
+				return /\d/.test(input);
+			},
+
+			isnumber:function(input) {
+				var pno = /^\d{10}$/;
+				if(input.match(pno))
+					this.valid = true;
+				else
+					this.valid = false;
+			},
+
+			isdob:function(input) {
+				var pattern = /^([0-3]{1})([0-9]{1})-([0-1]{1})([0-9])-([0-9]{4})$/;
+				if(input.match(pattern))
+					this.valid = true;
+				else
+					this.valid = false;
+			},
+
+			validemail:function(input)  {   
+				var atposition = input.indexOf("@");  
+				var dotposition = input.lastIndexOf(".");  
+				if (atposition < 1 || (dotposition < atposition + 2) || (dotposition + 2 >= input.length))  
+  					this.valid = false;
+  				else
+  					this.valid = true;
+			},
+
+			hasspecialchar:function(input) {
+				return /[^a-z0-9\\,\\.\\;]/g.test(input);
+			}
+		}
+
+		fname = new validfield("");
+		lname = new validfield("");
+		pnumb = new validfield("");
+		dob = new validfield("");
+		email = new validfield("");
+		pwd = new validfield("");
+
+		function validation() {
+			//validation First Name
+			var name = document.getElementById("firstname").value;
+			fname.validlength(name);
+			fname.empty(name);
+			var  nocheck = fname.hasnumber(name);
+			if(fname.exist == false) 
+				document.getElementById("errfname").innerHTML = "Required Field";
+			else if(fname.valid == false || nocheck == true)
+				document.getElementById("errfname").innerHTML = "Please enter valid details : Length 6 - 15, only alphabets";
+			else {
+				fname.name = name;
+				document.getElementById("errfname").innerHTML = "";
+			}
+
+			//validation Last Name
+			var name2 =document.getElementById("lastname").value;
+			lname.validlength(name2);
+			lname.empty(name2);
+			var  nocheck2 = lname.hasnumber(name2);
+			if(lname.exist == false) 
+				document.getElementById("errlname").innerHTML = "Required Field";
+			else if(lname.valid == false || nocheck2 == true)
+				document.getElementById("errlname").innerHTML = "Please enter valid details : Length 6 - 15, only alphabets";
+			else {
+				lname.name = name2;
+				document.getElementById("errlname").innerHTML = "";
+			}
+
+			//validation Phone number
+			var numb = document.getElementById("phoneno").value;
+			pnumb.empty(numb);
+			pnumb.isnumber(numb);
+			if(pnumb.exist == false)
+				document.getElementById("errpnumb").innerHTML = "Required Field";
+			else if(pnumb.valid == false)
+				document.getElementById("errpnumb").innerHTML = "Please enter a valid phone number";
+			else
+				document.getElementById("errpnumb").innerHTML = "";
+
+			//validation date of birth
+			document.getElementById("age").innerHTML = "";
+			var date = document.getElementById("dobid").value;
+			dob.empty(date);
+			dob.isdob(date);
+			if(dob.exist == false)
+				document.getElementById("errdob").innerHTML = "Required Field";
+			else if(dob.valid == false)
+				document.getElementById("errdob").innerHTML = "Please enter a valid date in DD-MM-YYYY format";
+			else {
+				calc_age();
+				document.getElementById("errdob").innerHTML = "";
+			}
+
+			//validation email
+			var id = document.getElementById("emailid").value;
+			email.empty(id);
+			email.validemail(id);
+			if(email.exist == false)
+				document.getElementById("erremail").innerHTML = "Required Field";
+			else if(email.valid == false)
+				document.getElementById("erremail").innerHTML = "Please enter a valid email address";
+			else
+				document.getElementById("erremail").innerHTML = "";
+
+			//validation password
+			var pass = document.getElementById("password").value;
+			pwd.empty(pass);
+			pwd.validlength(pass);
+			var checkno2 = false;
+			checkno2 = pwd.hasnumber(pass);
+			checkno2 = pwd.hasspecialchar(pass);
+			if(pwd.exist == false)
+				document.getElementById("errpass").innerHTML = "Required Field";
+			else if(pwd.valid == false || checkno2 == false)
+				document.getElementById("errpass").innerHTML = "Please enter a valid password";
+			else
+				document.getElementById("errpass").innerHTML = "";
+
+		}
+
+		function calc_age()
+		{
+			var dt = document.getElementById("dobid").value;
+			var d = new Date(dt);
+			var today = new Date();
+			var y = today.getFullYear()-d.getFullYear() + " years";
+			var m = Math.abs(today.getMonth() - d.getMonth()) + " months";
+			var t = Math.abs(today.getDate() - d.getDate()) + " days";
+			age = y + ", " + m + ", " + t + ".";
+			document.getElementById("age").innerHTML = age;
+		}
+
+	</script>
+
+	
+</body>
+</html>

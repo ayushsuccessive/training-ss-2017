@@ -61,8 +61,7 @@ function validation( key, value, field ) {
 	} else if(key == "allow") {
 
 		if(value == "alphabet") {
-			var regex = /^[a-zA-Z ]*$/;
-			return (field.match(regex));
+			return !(/\d/.test(field));
 		} else if(value == "number") {
 			console.log(isNaN(parseInt(field)));
 			return !(isNaN(field));

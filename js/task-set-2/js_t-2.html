@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Javascript Task 2</title>
+		<link rel="stylesheet" type="text/css" href="js_t-2.css"> 
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	</head>
+	<body>
+		<div class="top">
+			<p>Counter : <count id="counter">0</count></p>
+			<p>
+			Click to add more rows
+			<input type="button" value="ADD ROWS" id="addrows">
+			</p>
+			<p>
+				Click to Delete all data
+				<input type="button" id="delete" value="DELETE ALL">
+			</p>
+			<table id="mytable">
+				<tr style="background-color: Grey">
+					<th>Name</th>
+					<th>Push/Pull</th>
+					<th>Actions</th>
+				</tr>
+			</table>	
+		</div>
+		<div class="bottom">
+			<p>Array of elements : </p>
+			<span id="output"></span>
+			
+		</div>
+		
+
+
+		<script>
+
+			$(function() {
+				var record = [];
+				$("#addrows").click(function() {
+					var str = "<tr class='rowcount'><td><input type='text' class='name'></td><td><input type='checkbox' class='check'></td><td><input type='button' value='X' class='action'></td></tr>";
+					$("#mytable").append(str);
+					$("#counter").text($(".rowcount").length);
+				});
+
+				$("#mytable").on("click", '.check', function() {
+
+					if($(this).closest("tr").find(".check").is(':checked') ) {
+						record.push($(this).closest("tr").find(".name").val());
+						$("#output").text("");
+						$("#output").text( record.join( " | " ) );
+					}
+					else {
+						var removeItem = $(this).closest("tr").find(".name").val();
+						record = jQuery.grep(record, function(value) {
+  							return value != removeItem;
+						});
+						$("#output").text("");
+						$("#output").text( record.join( " | " ) );
+					}
+					
+				});
+
+				$("#mytable").on("click", '.action', function() {
+					if(!confirm("do you want to delete the element")) {
+						return false;
+					}
+
+
+			    	var removeItem = $(this).closest("tr").find(".name").val();
+					record = jQuery.grep(record, function(value) {
+							return value != removeItem;
+					});
+					$("#output").text("");
+					$("#output").text( record.join( " | " ) );
+					$(this).closest("tr").remove();
+					$("#counter").text($(".rowcount").length);
+  				    	
+				});
+
+				$("#delete").click(function() {
+					if(confirm("do you want to delete the element") == 1){
+						$(".rowcount").remove();
+						$("#output").text("");
+						$("#counter").text($(".rowcount").length);	
+					}				
+				});
+
+			});
+
+		</script>
+	</body>
+</html>

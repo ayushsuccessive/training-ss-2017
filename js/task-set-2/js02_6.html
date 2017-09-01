@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>javascript task 02-6</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="col-sm-2"></div>
+	<div class="panel panel-default col-sm-8">
+		<div class="panel-heading"><p class="text-primary">Javascript Task 02-1</p></div>
+		<div class="panel-body">
+			<div class="form-group">
+				<label class="col-sm-2">Phone Number</label>
+				<span class="text-danger" id="phnoalert"></span>
+				<input type="text" class="form-control" id="phno"><br>
+			</div>
+			<div class="form-group">
+
+				<label class="col-sm-2">IP Address</label>
+				<span class="text-danger" id="ipalert"></span>
+				<input type="text" class="form-control" id="ipadd"><br>
+			<div class="form-group">
+				<label class="col-sm-2">Email Address</label>
+				<span class="text-danger" id="emailalert"></span>
+				<input type="text" class="form-control" id="email"><br>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-2"></div>
+	<script>
+		function phnumber(input) {
+				var phno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+				if(input.match(phno))
+					return 0;
+				else
+					return 1;
+			}
+
+		function ipaddress(input) {
+				var pattern = [];
+				pattern = input.split(".");
+				if(pattern.length !== 4) {
+					return 0;
+				}
+
+				for(i = 0; i < 4; i++) {
+					if(pattern[i] < 0 || pattern[i] > 255) {
+						return 0;
+					}
+				}
+				return 1;
+			}
+
+		function emailaddress(input) {
+			var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    			return re.test(input);
+		}
+
+		$(function() {
+			$(".form-control").focusout(function() {
+				var response;
+				$(this).parent().find('.text-danger').empty();
+				if( this.id == 'phno') {
+					response = phnumber($(this).val());
+					if(response) {
+						$("#phnoalert").text("invalid, enter phone number");
+					}
+				} else if( this.id == 'ipadd') {
+					response = ipaddress($(this).val());
+					if(!response) {
+						$("#ipalert").text('invalid, enter a valid ip address');
+					}
+				} else if(this.id == 'email') {
+					response = emailaddress($(this).val());
+					if(!response) {
+						$("#emailalert").text("invalid, enter a valid email address");
+					}
+				}
+			});
+		});
+		
+	</script>
+</body>
+</html>

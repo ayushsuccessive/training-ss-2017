@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Javascript task 02-3</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="include/bootstrap-datetimepicker.css">
+  	<link rel="stylesheet" href="include/bootstrap-datetimepicker.min.css">
+  	<script src="include/bootstrap-datetimepicker.js"></script>
+  	<script src="include/bootstrap-datetimepicker.min.js"></script>
+	
+</head>
+<body>
+	<div class="col-sm-2"></div>
+	<div class="panel panel-default col-sm-8">
+		<div class="panel-heading"><p class="text-primary">Javascript Task 02-3</p></div>
+		<div class="panel panel-body">
+			<div class="form-group">
+				<label>Date Time </label>
+        		<div class='input-group date col-sm-6' id='datetimepicker1'>
+           			<input type='text' class="form-control" id="input"/>
+            		<span class="input-group-addon">
+    					<span class="glyphicon glyphicon-calendar"></span>
+            		</span>
+        		</div>
+        		<br>
+        		<button type="button" class="btn btn-primary" id="calc">Calculate</button>
+    		</div>
+    		<div class="panel-footer">
+    		<span id="output"></span>
+    	</div>
+    	</div>
+    </div>
+	<script>
+    	$(function () {
+    		var now = new Date();
+    		$('#datetimepicker1').datetimepicker('setEndDate', now);
+
+    		
+    		$("#calc").click(function() {
+    			var dt = new Date($("#input").val());
+    			var diff =  Math.floor(( Date.parse(now) - Date.parse(dt) ) / 86400000);
+    			$("#output").text("Days : " + diff);				
+ 		   	});
+    	});
+	</script>
+</body>
+</html>

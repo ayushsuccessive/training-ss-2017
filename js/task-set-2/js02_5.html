@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Javascript task 02-5</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="col-sm-2"></div>
+	<div class="panel panel-default col-sm-8">
+		<div class="panel-heading"><p class="text-primary">Javascript Task 02-5</p></div>
+		<div class="panel-body">
+			<div class="form-group">
+				<label>Enter element to add</label>
+				<input type="text" class="form-control" id="input"><br>
+				<button type="button" class="btn btn-primary" id="add">ADD ELEMENT</button>
+				<br><br>
+				<label>Enter element to remove</label>
+				<input type="text" class="form-control" id="index"><br>
+				<button type="button" class="btn btn-primary" id="remove">DELETE ELEMENT</button>
+			<div class="panel-footer">
+				<div class="alert alert-danger" style="display:none;">
+					<strong>Alert!</strong> Element not found
+				</div>
+				<div class="alert alert-info" style="display:none;">
+					<strong>Alert!</strong> Element added/removed successfully
+				</div>
+				<span id="output" class="text-success"></span><br>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-2"></div>
+	<script type="text/javascript">
+		class items {
+			constructor() {
+				this.item = [];
+				this.length = 0;
+			}
+			add (value) {
+				this.item.push(value);
+			}
+			
+			remove (value) {
+				var i;
+				for(i = 0 ; i < this.item.length ; i++) {
+					if(this.item[i] == value) {
+						this.item.splice( i , 1 );
+						return 1;
+					}
+				}
+				return 0;
+			}
+		}
+
+		$(function() { 
+
+			var objects = new items("");
+
+			$("#add").click(function() {
+				$(".alert-danger").prop("style","display:none");
+				objects.add($("#input").val());
+				$("#input").val("");
+				$("#output").text(objects.item.toString());
+				$(".alert-info").prop("style","display:block");
+			});
+
+			$("#remove").click(function() {
+				$(".alert-info").prop("style","display:none");
+				$(".alert-danger").prop("style","display:none");
+				if( !objects.remove( $("#index").val()) ) {
+					$(".alert-danger").prop("style","display:block");	
+				}else {
+					$(".alert-info").prop("style","display:block");
+				}
+				$("#index").val("");
+				$("#output").text(objects.item.toString());
+
+			});
+
+		});
+	</script>
+</body>
+</html>

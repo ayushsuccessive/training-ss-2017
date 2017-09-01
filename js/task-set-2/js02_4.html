@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>javascript task 04-4</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="col-sm-2"></div>
+	<div class="panel panel-default col-sm-8">
+		<div class="panel-heading"><p class="text-primary">Javascript Task 02-1</p></div>
+		<div class="panel-body">
+			<div class="form-group">
+				<label>Enter element to push into first array</label>
+				<input type="text" class="form-control" id="input1"><br>
+				<button type="button" class="btn btn-primary" id="add1">Push</button>
+				<br><br>
+				<label>Enter elements to push into second array</label>
+				<input type="text" class="form-control" id="input2"><br>
+				<button type="button" class="btn btn-primary" id="add2">Push</button><br><br>
+				<button type="button" class="btn btn-primary" id="calc">Calculate</button>
+			</div>
+			<div class="panel-footer">
+				<span id="output1" class="text-success"></span><br>
+				<span id="output2" class="text-primary"></span><br>
+				<span id="output3" class="text-success"></span><br>
+				<span id="output4" class="text-primary"></span><br>
+				<span id="output5" class="text-success"></span>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+
+	$(function() {
+		var a = [];
+		var b = [];
+		var c = [];
+		$("#add1").click(function() {
+			a = $("#input1").val().split(/[\s,]+/);
+			$("#output1").text("array 1 : " + a.toString());
+			$("#input1").val("");
+			c = [];
+			
+		});
+
+		$("#add2").click(function() {
+			b = $("#input2").val().split(/[\s,]+/);
+			$("#output2").text("array 2 : " + b.toString());
+			$("#input2").val("");
+			c = [];
+		});
+
+		$("#calc").click(function() {
+			a.sort();
+			b.sort();
+			var i=0;
+			var j=0;
+			while(i < a.length ) {
+				if(a[i] == a[i+1]) {
+					a.splice(i,1);
+				} else {
+					i++;
+				}
+			}
+			while(j < b.length ) {
+				if(b[j] == b[j+1]) { 
+					b.splice(j,1);
+				} else {
+					j++;
+				}
+
+			}
+
+			i = 0;
+			j = 0;
+			while(i < a.length && j < b.length) {
+				if(a[i] == b[j]) {
+					c.push(a[i]);
+					a.splice(i,1);					 
+					b.splice(j,1);
+				} else if(a[i] < b[j]) {
+					i++;
+				} else {
+					j++;
+				}
+			}
+			$("#output3").text("intersection array : " + c.toString());
+			$("#output4").text("Difference array 1 to 2 : " + a.toString());
+			$("#output5").text("Difference array 2 to 1 : " + b.toString());
+			
+
+		});
+	});
+
+	</script>
+</body>
+</html>

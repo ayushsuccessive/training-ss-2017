@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Javascript task 02-2</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+</head>
+<body>
+	<div class="col-sm-2"></div>
+	<div class="panel panel-default col-sm-8">
+		<div class="panel-heading"><p class="text-primary">Javascript Task 02-2</p></div>
+		<div class="panel-body">
+			<div class="form-group">
+				<label>Enter element to push into array</label>
+				<input type="text" class="form-control" id="input"><br>
+				<button type="button" class="btn btn-primary" id="add">Push</button>
+				<br><br>
+				<button type="button" class="btn btn-primary" id="clear">Refine array</button>
+			</div>
+			<div class="panel-footer">
+				<span id="output" class="text-success"></span>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-2"></div>
+	<script>
+		var arr = [NaN, 0, 15, false, -22, '',undefined, 47, null];
+		var a = [];
+		$(function() {
+			$("#add").click(function() {
+				var a = $("#input").val().split(/[\s,]+/);
+				arr = arr.concat(a);
+				$("#output").text(arr.toString());
+				$("#input").val("");
+			});
+
+			$("#clear").click(function() {
+				arr = bouncer(arr);
+				$("#output").text(arr.toString());
+			});
+
+			function bouncer(arr) {
+ 				return arr.filter(Boolean);
+			}
+		});
+
+	</script>
+</body>
+</html>

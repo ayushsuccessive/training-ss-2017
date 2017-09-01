@@ -57,21 +57,20 @@
 	<script>
 	$(function() {
 		$("#save").click( function() {
-			$(".alert-success").prop("style","display:none");
-			$(".alert-info").prop("style","display:none");
-			$(".alert-warning").prop("style","display:none");
-			$(".alert-danger").prop("style","display:none");
+			$(".alert").prop("style","display:none");
+
 			x = $("#input").val();
 			if($.isNumeric(x)) {
-				if(x == 0)
+				if(x == 0) {
 					$(".alert-success").prop("style","display:block");
-				else if(x == 1)
+				} else if(x == 1) {
 					$(".alert-info").prop("style","display:block");
-				else
+				} else {
 					$(".alert-warning").prop("style","display:block");
-			}
-			else
+				}
+			} else {
 				$(".alert-danger").prop("style","display:block");
+			}
 
 			$("#myModal").modal('toggle');
 			$("#input").val("");

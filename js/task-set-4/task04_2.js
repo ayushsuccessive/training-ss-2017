@@ -44,36 +44,37 @@ $.fn.dynamicform = function() {
 		}
 	});
 
+
+
+	function validation( key, value, field ) {
+		if(key == "minLength") {
+			return (field.length > value)
+
+		} else if(key == "maxLength") {
+			return (field.length < value)
+
+		} else if(key == "allow") {
+
+			if(value == "alphabet") {
+				return !(/\d/.test(field));
+			} else if(value == "number") {
+				console.log(isNaN(parseInt(field)));
+				return !(isNaN(field));
+			} else if(value == "email") {
+				var atposition = field.indexOf("@");  
+				var dotposition = field.lastIndexOf(".");  
+				return !(atposition < 1 || (dotposition < atposition + 2) || (dotposition + 2 >= field.length));
+			} else if(value == "any"){
+				return 1;
+			}
+
+		} else if(key == "length") {
+			return (field.length == value);
+		}
+	}
 }
 
 
 $(function() {
 	$("#output").dynamicform();
 });
-
-function validation( key, value, field ) {
-	if(key == "minLength") {
-		return (field.length > value)
-
-	} else if(key == "maxLength") {
-		return (field.length < value)
-
-	} else if(key == "allow") {
-
-		if(value == "alphabet") {
-			return !(/\d/.test(field));
-		} else if(value == "number") {
-			console.log(isNaN(parseInt(field)));
-			return !(isNaN(field));
-		} else if(value == "email") {
-			var atposition = field.indexOf("@");  
-			var dotposition = field.lastIndexOf(".");  
-			return !(atposition < 1 || (dotposition < atposition + 2) || (dotposition + 2 >= field.length));
-		} else if(value == "any"){
-			return 1;
-		}
-
-	} else if(key == "length") {
-		return (field.length == value);
-	}
-}
